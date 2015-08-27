@@ -5,6 +5,8 @@ Book, a simple Jekyll theme. [Demo](http://kkninjae.github.io/book/)
 
 ### Screenshots
 
+![](./assets/img/mobile.jpg)
+
 ![](./assets/img/index.jpg)
 
 ### Features
