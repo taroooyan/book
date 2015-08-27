@@ -1,7 +1,7 @@
 Book
 ====
 
-Book is a simple Jekyll theme like a real book. [Demo]()
+Book is a simple Jekyll theme like a real book. [Demo](http://kkninjae.com/book/)
 
 ### Screenshots
 

@@ -1,7 +1,8 @@
 title: Lang Liu
 description: Programmer & Traveler.
 url: http://kkninjae.com
-avatar: /assets/img/avatar.jpg
+baseurl: /book
+avatar: /book/assets/img/avatar.jpg
 favicon: /assets/img/favicon.ico
 google_analytics: UA-62396585-1
 disqus_shortname: kkninjae
