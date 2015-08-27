@@ -1,7 +1,7 @@
 Book
 ====
 
-Book is a simple Jekyll theme like a real book. [Demo](http://kkninjae.com/book/)
+Book is a simple Jekyll theme like a real book. [Demo](http://kkninjae.github.io/book/)
 
 ### Screenshots
 
@@ -10,7 +10,7 @@ Book is a simple Jekyll theme like a real book. [Demo](http://kkninjae.com/book/
 ### Features
 
 * Responsive layout and mobile first
-* Customized [404]() page
+* Customized [404](http://kkninjae.github.io/book/hehe) page
 * Timeline style for post archive
 
 ### Get started
