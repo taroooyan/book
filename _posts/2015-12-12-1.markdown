@@ -1,0 +1,81 @@
+---
+layout: post
+title:  "天気予報を確実に知りたい"
+date:  2015-12-12 11:03:01
+categories: IoT
+tags: [IoT]
+---
+雨に打たれないためにも雨が振りそうなときには傘を持つようにしたい.  
+
+<!--more-->
+
+この記事は[Aizu Advent Calendar 2015](http://www.adventar.org/calendars/888#list-2015-12-11)の12日目のです。  
+前の人 [@TobiasGSmollett](https://twitter.com/TobiasGSmollett):[日常系のゆるふわな何か](http://qiita.com/TobiasGSmollett/items/c839f0109229795be444)  
+記事を書いていて気づいたけどAizu Advent Calender 2015 のURL *http://www.adventar.org/calendars/888*がゾロ目だった.  
+
+### **やりたいこと**  
+普段から天気予報を見る習慣がないので基本的に傘を持っていなくて，よく雨に打たれる．  
+まぁ, 家を出る前にスマホとかで確認をすれば良いのだが，それすら忘れる．何も気にすること無くその日の天気予報を確実に知りたいな．  
+そこで, 家をでる前にその日の天気予報を喋ってもらえば確実に気づけると思ったので, そのようなものを作ってみる.  
+とりあえず環境はOSXでためして、raspebery piに移したい.
+
+### **やること**  
+
+1. 天気予報の取得  
+![week_weather](http://taroooyan.github.io/images/2015-12-12-weather.png)  
+気象庁の天気予報をJSONとして配信している"[drk7.jp](http://www.drk7.jp/weather/json/07.js)"を使って情報を取得する.  
+
+1. 音声ファイルの作成  
+テキストを音声に変換してくれる便利なAPIがあるのでそれを使用する. 今回は[VoiceText Web API](https://cloud.voicetext.jp/webapi)を使います.  
+![webapi](http://taroooyan.github.io/images/2015-12-12-webapi.png)  
+これを使用するためのAPI_KEYを取得しておきます.  
+<script src="https://gist.github.com/taroooyan/dc95ca1d5129fc474b28.js"></script>
+これでtextを音声ファイルにしてaac.wavという名前で生成されます.  
+
+1. 人が家から出るのを検知して, 音声を流す  
+測距モジュール(GP2Y0A21)を使用して判定する.(人感センサーや超音波センサーでも可能だが以前に使ったことのあるこれを使用)  
+*このセンサについては[以前の記事](http://taroooyan.github.io/%E9%9B%BB%E5%AD%90%E5%B7%A5%E4%BD%9C/2015/08/16/1/)で紹介  
+このセンサーを玄関の扉にくっつけてあげて近づいた時に反応するように調整する.  
+
+### **できたもの**  
+<script src="http://gist-it.appspot.com/github/taroooyan/notice_weather/blob/master/main.rb"></script>
+<script src="http://gist-it.appspot.com/github/taroooyan/notice_weather/blob/master/Arduino/src/sketch.ino"></script>
+ログファイルに書き込むことをしていないので実行するときに書き込む  
+$`ruby ./main.rb > log`
+
+これで、センサに近づいた時にその日の天気を教えてくれものができた.  
+![2](http://taroooyan.github.io/images/2015-12-12-fin.png)  
+また、毎日2時になると更新されるので以下のうようなデータ取れているはず.  
+
+
+    2015-12-12
+    気温
+    max 11
+    min 6
+    降水確率
+    00-06 0%
+    06-12 20%
+    12-18 0%
+    18-24 0%
+    天気
+    晴れ
+    --------------
+    2015-12-13
+    気温
+    max 10
+    min 2
+    降水確率
+    00-06 0%
+    06-12 0%
+    12-18 10%
+    18-24 10%
+    天気
+    くもり
+    --------------
+    ...
+
+
+実はまだ玄関に取り付けてないので早くraspbery piに移して取り付けよう.
+
+次の人は[@a_r_g_v](https://twitter.com/a_r_g_v)
+よろしくお願いします!!

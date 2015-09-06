@@ -1,0 +1,78 @@
+---
+layout: post
+title:  "ArduinoとVim"
+date:  2015-07-15 23:18:43
+categories: 電子工作
+tags: [Arduino,Vim]
+---
+Arduinoを使った開発をVimでしたい！  
+<!--more-->
+
+#**Arduinoとは**  
+電子工作をやったことがある方ならきっと知っていると思いますが、[Arduino](https://www.arduino.cc)はマイコンボードとプログラミング環境のことで、公式からIDEが出ており比較的簡単に電子工作をすることができます。  
+
+#**Vimで開発がしたい**  
+
+公式からIDEが出ていてこれにはシリアルモニタやサンプルプログラムなど便利な機能があるのですが、コードを書く際にVimのキーバインドなどは使えなくとても使いづらい...（自分的に）。  
+そこでVimによるArduinoの開発がしたいと思い、調べると[ino](http://inotool.org)というものがあった。  
+
+#**インストール**  
+
+※環境はMac OS 10.9.5  
+※Arduino IDEを使わないにしてもinoを利用するには必要になるのでインストールしておきます。  
+※最新版の1.6.5をダウンロードしてやった際にエラーが出てうまく行かなかったので、バージョンは1.0.5を推薦します。  
+{% highlight sh %}
+$ easy_install ino
+{% endhighlight %}
+
+プロジェクトの作成
+{% highlight sh %}
+$ mkdir test 
+$ cd test
+$ ino init
+{% endhighlight %}
+これでtest内にsrc/とlib/というフォルダが作成されます。srcの中にあるsketch.inoにてプログラムを書きます。  
+試しに以下のように変更します。  
+{% highlight sh %}
+void setup() {
+	pinMode(13,OUTPUT);
+	Serial.begin(9600);
+}
+
+void loop() {
+	Serial.println("test");
+	digitalWrite(13,HIGH);
+	delay(3000);
+	digitalWrite(13,LOW);
+}
+{% endhighlight %}
+これは3秒おきにシリアルモニタにtestという表示され、Arduino unoのtxと書かれているLEDが点滅するプログラムです。
+
+#**ビルドと書き込み**  
+
+＊今回Arduino Uno R3というマイコンボードを使用しています。  
+{% highlight sh %}
+$ ino build
+$ ino upload
+{% endhighlight %}
+これでArduino Uno側に書き込まれたはずです。
+{% highlight sh %}
+Guessing serial port ... /dev/tty.＊＊＊＊　//ここは環境によって変動します。
+{% endhighlight %}
+
+![upload画像](http://taroooyan.github.io/images/2015-07-15-ino_upload.png)
+
+#**シリアルモニタの接続方法**  
+プログラムを書き込んだ際に
+{% highlight sh %}
+Guessing serial port ... /dev/tty.usbmodemfa131
+{% endhighlight %}
+
+のように表示されたとおもいます。  
+これに対して接続すればよいので  
+{% highlight sh %}
+$ screen /dev/tty.usbmodemfa131
+{% endhighlight %}
+これで3秒おきにシリアルモニタにtestという表示され、Arduino unoのtxと書かれているLEDが点滅します。  
+
+

@@ -1,0 +1,22 @@
+---
+layout: post
+title:  "Captianを入れてみた"
+date:  2015-07-28 10:06:38
+categories: OS
+tags: [Captian,OS X]
+---
+Apple から一般向けに公開されているOS X El Capitanを入れてみました。
+
+これは、まだベータ版でApple Beta Software Programに参加することで、El Capitanを入手することができます。しかし、まだベータ版ですので、入れる際にはバックアップを取ってからにしたほうが良いと思います。  
+<!--more-->
+
+
+![captian_os](http://taroooyan.github.io/images/2015-7-28-captian_os.png)
+
+あまり試していませんが、日本語変換の機能がとても気持ち悪かったので紹介。  
+
+![capitan_gif](http://taroooyan.github.io/images/2015-7-28-capitan.gif)
+
+この変換機能面白い。  
+文章とかを作成する際にスペースキーを押す回数がとても減りました。  
+

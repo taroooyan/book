@@ -1,0 +1,538 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>なにもしない太郎</title>
+    <description>適当になにかを書くブログ</description>
+    <link>taroooyan.github.io# site url/</link>
+    <atom:link href="taroooyan.github.io# site url/feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Fri, 01 Apr 2016 16:18:10 +0900</pubDate>
+    <lastBuildDate>Fri, 01 Apr 2016 16:18:10 +0900</lastBuildDate>
+    <generator>Jekyll v3.1.2</generator>
+    
+      <item>
+        <title>天気予報を確実に知りたい</title>
+        <description>&lt;p&gt;雨に打たれないためにも雨が振りそうなときには傘を持つようにしたい.&lt;/p&gt;
+
+&lt;!--more--&gt;
+
+&lt;p&gt;この記事は&lt;a href=&quot;http://www.adventar.org/calendars/888#list-2015-12-11&quot;&gt;Aizu Advent Calendar 2015&lt;/a&gt;の12日目のです。&lt;br /&gt;
+前の人 &lt;a href=&quot;https://twitter.com/TobiasGSmollett&quot;&gt;@TobiasGSmollett&lt;/a&gt;:&lt;a href=&quot;http://qiita.com/TobiasGSmollett/items/c839f0109229795be444&quot;&gt;日常系のゆるふわな何か&lt;/a&gt;&lt;br /&gt;
+記事を書いていて気づいたけどAizu Advent Calender 2015 のURL &lt;em&gt;http://www.adventar.org/calendars/888&lt;/em&gt;がゾロ目だった.&lt;/p&gt;
+
+&lt;h3 id=&quot;section&quot;&gt;&lt;strong&gt;やりたいこと&lt;/strong&gt;&lt;/h3&gt;
+&lt;p&gt;普段から天気予報を見る習慣がないので基本的に傘を持っていなくて，よく雨に打たれる．&lt;br /&gt;
+まぁ, 家を出る前にスマホとかで確認をすれば良いのだが，それすら忘れる．何も気にすること無くその日の天気予報を確実に知りたいな．&lt;br /&gt;
+そこで, 家をでる前にその日の天気予報を喋ってもらえば確実に気づけると思ったので, そのようなものを作ってみる.&lt;br /&gt;
+とりあえず環境はOSXでためして、raspebery piに移したい.&lt;/p&gt;
+
+&lt;h3 id=&quot;section-1&quot;&gt;&lt;strong&gt;やること&lt;/strong&gt;&lt;/h3&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;天気予報の取得&lt;br /&gt;
+&lt;img src=&quot;http://taroooyan.github.io/images/2015-12-12-weather.png&quot; alt=&quot;week_weather&quot; /&gt;&lt;br /&gt;
+気象庁の天気予報をJSONとして配信している”&lt;a href=&quot;http://www.drk7.jp/weather/json/07.js&quot;&gt;drk7.jp&lt;/a&gt;“を使って情報を取得する.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;音声ファイルの作成&lt;br /&gt;
+テキストを音声に変換してくれる便利なAPIがあるのでそれを使用する. 今回は&lt;a href=&quot;https://cloud.voicetext.jp/webapi&quot;&gt;VoiceText Web API&lt;/a&gt;を使います.&lt;br /&gt;
+&lt;img src=&quot;http://taroooyan.github.io/images/2015-12-12-webapi.png&quot; alt=&quot;webapi&quot; /&gt;&lt;br /&gt;
+これを使用するためのAPI_KEYを取得しておきます.&lt;br /&gt;
+&lt;script src=&quot;https://gist.github.com/taroooyan/dc95ca1d5129fc474b28.js&quot;&gt;&lt;/script&gt;
+これでtextを音声ファイルにしてaac.wavという名前で生成されます.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;人が家から出るのを検知して, 音声を流す&lt;br /&gt;
+測距モジュール(GP2Y0A21)を使用して判定する.(人感センサーや超音波センサーでも可能だが以前に使ったことのあるこれを使用)&lt;br /&gt;
+*このセンサについては&lt;a href=&quot;http://taroooyan.github.io/%E9%9B%BB%E5%AD%90%E5%B7%A5%E4%BD%9C/2015/08/16/1/&quot;&gt;以前の記事&lt;/a&gt;で紹介&lt;br /&gt;
+このセンサーを玄関の扉にくっつけてあげて近づいた時に反応するように調整する.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;section-2&quot;&gt;&lt;strong&gt;できたもの&lt;/strong&gt;&lt;/h3&gt;
+&lt;script src=&quot;http://gist-it.appspot.com/github/taroooyan/notice_weather/blob/master/main.rb&quot;&gt;&lt;/script&gt;
+
+&lt;script src=&quot;http://gist-it.appspot.com/github/taroooyan/notice_weather/blob/master/Arduino/src/sketch.ino&quot;&gt;&lt;/script&gt;
+
+&lt;p&gt;ログファイルに書き込むことをしていないので実行するときに書き込む&lt;br /&gt;
+$&lt;code class=&quot;highlighter-rouge&quot;&gt;ruby ./main.rb &amp;gt; log&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;これで、センサに近づいた時にその日の天気を教えてくれものができた.&lt;br /&gt;
+&lt;img src=&quot;http://taroooyan.github.io/images/2015-12-12-fin.png&quot; alt=&quot;2&quot; /&gt;&lt;br /&gt;
+また、毎日2時になると更新されるので以下のうようなデータ取れているはず.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;2015-12-12
+気温
+max 11
+min 6
+降水確率
+00-06 0%
+06-12 20%
+12-18 0%
+18-24 0%
+天気
+晴れ
+--------------
+2015-12-13
+気温
+max 10
+min 2
+降水確率
+00-06 0%
+06-12 0%
+12-18 10%
+18-24 10%
+天気
+くもり
+--------------
+...
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;実はまだ玄関に取り付けてないので早くraspbery piに移して取り付けよう.&lt;/p&gt;
+
+&lt;p&gt;次の人は&lt;a href=&quot;https://twitter.com/a_r_g_v&quot;&gt;@a_r_g_v&lt;/a&gt;
+よろしくお願いします!!&lt;/p&gt;
+</description>
+        <pubDate>Sat, 12 Dec 2015 20:03:01 +0900</pubDate>
+        <link>taroooyan.github.io# site url/iot/2015/12/12/1.html</link>
+        <guid isPermaLink="true">taroooyan.github.io# site url/iot/2015/12/12/1.html</guid>
+        
+        <category>IoT</category>
+        
+        
+        <category>IoT</category>
+        
+      </item>
+    
+      <item>
+        <title>A Jekyll Theme Named Book</title>
+        <description>&lt;p&gt;Simple is better, but many themes are over designed. So, &lt;a href=&quot;https://github.com/kkninjae/book&quot;&gt;Book&lt;/a&gt; is built.&lt;/p&gt;
+
+&lt;h2 id=&quot;get-started&quot;&gt;Get started&lt;/h2&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;fork the &lt;a href=&quot;https://github.com/kkninjae/book/fork&quot;&gt;repo&lt;/a&gt;.&lt;/li&gt;
+  &lt;li&gt;clone &lt;code class=&quot;highlighter-rouge&quot;&gt;git clone https://github.com/username/book&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;run &lt;code class=&quot;highlighter-rouge&quot;&gt;jekyll serve -w&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://localhost:4000&quot;&gt;http://localhost:4000&lt;/a&gt; should be ready.&lt;/p&gt;
+
+&lt;h2 id=&quot;customize&quot;&gt;Customize&lt;/h2&gt;
+
+&lt;h3 id=&quot;configyml-file&quot;&gt;_config.yml file&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;title: site name&lt;/li&gt;
+  &lt;li&gt;description: site description&lt;/li&gt;
+  &lt;li&gt;url: site url&lt;/li&gt;
+  &lt;li&gt;avatar: absolute path of avatar which is a picture (140px * 140px) on the index page.&lt;/li&gt;
+  &lt;li&gt;favicon: absolute path of site favicon&lt;/li&gt;
+  &lt;li&gt;google_analytics: id for google analystics&lt;/li&gt;
+  &lt;li&gt;disqus_shortname: shortname of disque comment system&lt;/li&gt;
+  &lt;li&gt;about: content on the about page.
+you can write more than one paragraph but the format should be like the original one.
+the special word &lt;code class=&quot;highlighter-rouge&quot;&gt;?link?&lt;/code&gt; will be replaced by one of the links which are listed under links.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;warning&quot;&gt;warning&lt;/h3&gt;
+
+&lt;p&gt;Please do not delete the first two lines of style.css file.&lt;/p&gt;
+
+&lt;h2 id=&quot;end&quot;&gt;End.&lt;/h2&gt;
+
+&lt;p&gt;If you like it, &lt;a href=&quot;https://github.com/kkninjae/book&quot;&gt;star&lt;/a&gt; it :).&lt;/p&gt;
+
+&lt;p&gt;If you have a problem, &lt;a href=&quot;https://github.com/kkninjae/book/issues&quot;&gt;github issue is ready&lt;/a&gt;.&lt;/p&gt;
+</description>
+        <pubDate>Fri, 28 Aug 2015 00:00:00 +0900</pubDate>
+        <link>taroooyan.github.io# site url/blog/2015/08/28/jekyll-theme-book.html</link>
+        <guid isPermaLink="true">taroooyan.github.io# site url/blog/2015/08/28/jekyll-theme-book.html</guid>
+        
+        <category>english</category>
+        
+        
+        <category>blog</category>
+        
+      </item>
+    
+      <item>
+        <title>Book Style</title>
+        <description>&lt;h1 id=&quot;three-colors-for-heading-2&quot;&gt;Three Colors for Heading 2&lt;/h1&gt;
+
+&lt;h2 id=&quot;rabbit&quot;&gt;rabbit&lt;/h2&gt;
+
+&lt;p&gt;Audiam scripta sanctus ea has, sea ullum periculis repudiare ea. Accusata dissentiet sit id, euismod consequuntur sed in, etiam malorum vivendum no usu. Nec cu habeo equidem interpretaris, dicam quidam eu vix. Eu ius iuvaret oportere.&lt;/p&gt;
+
+&lt;p&gt;Ea partem virtute nusquam eum, sea minim referrentur in. Vidit consectetuer nam ex. Tempor blandit theophrastus an vel, fastidii incorrupte cum cu, in sint legendos pertinacia mei. Duo eius erat affert te, ad vel diceret posidonium, ne vel praesent persecuti definitiones. Ad pro mutat decore, sit nonumy consul nostrum ei.&lt;/p&gt;
+
+&lt;h2 id=&quot;cat&quot;&gt;cat&lt;/h2&gt;
+
+&lt;p&gt;Te sea melius legendos, nobis prodesset cum ei. Consulatu accommodare sit ne. Duo lorem accumsan moderatius an, id has sensibus praesent patrioque. Eu usu scaevola scripserit, clita altera pri cu.&lt;/p&gt;
+
+&lt;p&gt;Virtute constituto theophrastus ad eum, vis at stet salutandi. Te utamur sanctus perfecto usu, congue dissentiunt ei ius, cu eam probatus assentior. Cu omnis legere est, et vidit corrumpit mei, stet illum mundi mea in. Ei ius partem eligendi. Sumo utinam et sea, an ullum ludus eum, eos novum repudiare deseruisse eu.&lt;/p&gt;
+
+&lt;h2 id=&quot;dog&quot;&gt;dog&lt;/h2&gt;
+
+&lt;p&gt;Vis nullam dissentiet ei, mea nihil accumsan perfecto ex, agam melius et usu. Vix reque aperiri instructior cu, nec ad admodum copiosae. Nobis appetere persequeris eos cu, luptatum sapientem facilisis te nam. Mazim philosophia ut est, no insolens assueverit has, cu velit feugiat molestie eam.&lt;/p&gt;
+
+&lt;p&gt;Cu dictas perpetua mel, volumus evertitur at vis. Quo case errem senserit in. Ex usu facer feugait evertitur, nam te veri vivendum, vim cu elit omnes menandri. Inermis interesset quaerendum sea at, vidit appetere reformidans duo ei. Cu usu perpetua principes. At etiam homero mel, usu platonem forensibus an.&lt;/p&gt;
+
+&lt;h2 id=&quot;lion&quot;&gt;lion&lt;/h2&gt;
+
+&lt;p&gt;Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/book/assets/img/blog/dessert.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Tamquam ullamcorper consequuntur vim in, clita tritani consulatu te duo. Vel ut ignota petentium contentiones. Sea in assum tantas ubique, ne sit amet eripuit bonorum. At vis fabellas maiestatis, ea nihil ridens nec, utroque appareat convenire id vim. Est virtute epicurei ad.&lt;/p&gt;
+
+&lt;h1 id=&quot;blockquote&quot;&gt;Blockquote&lt;/h1&gt;
+
+&lt;p&gt;Cetero petentium in vim. Ea prodesset complectitur per. Dolor putant platonem eos ei, pertinacia conclusionemque quo ea, percipit consequuntur in vim. Et eos eius utroque consectetuer, in unum posidonium mea. Quod omnes consequuntur et vel, his vocent nominavi eu.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;I am a blockquote.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet.&lt;/p&gt;
+
+&lt;h1 id=&quot;python-code&quot;&gt;Python Code&lt;/h1&gt;
+
+&lt;p&gt;Nam an perpetua senserit temporibus. Sea velit iisque veritus ea. Pri ut assum partiendo. Eu iuvaret maiorum mea, atqui commune ad eam. Et est phaedrum forensibus, nec et elitr delenit feugait.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;def foo():
+    return &quot;foo&quot;
+
+def main():
+    foo()
+
+if __name__ == &#39;__main__&#39;:
+    main()
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Est inani prodesset ex. Eu reque perfecto consulatu vix, omnes concludaturque eum an. Detraxit consequuntur per eu, virtute atomorum voluptatibus mei ei. Tamquam vituperatoribus et vis, quo in copiosae apeirian.&lt;/p&gt;
+</description>
+        <pubDate>Fri, 28 Aug 2015 00:00:00 +0900</pubDate>
+        <link>taroooyan.github.io# site url/blog/2015/08/28/book-style-doc.html</link>
+        <guid isPermaLink="true">taroooyan.github.io# site url/blog/2015/08/28/book-style-doc.html</guid>
+        
+        <category>english</category>
+        
+        
+        <category>blog</category>
+        
+      </item>
+    
+      <item>
+        <title>測距モジュールを使ってみた</title>
+        <description>&lt;p&gt;シャープから発売されている測距モジュール”&lt;a href=&quot;http://akizukidenshi.com/catalog/g/gI-02551/&quot;&gt;GP2Y0A21&lt;/a&gt;“を使ってみたのでそれのメモ。&lt;/p&gt;
+
+&lt;!--more--&gt;
+
+&lt;p&gt;#&lt;strong&gt;測距モジュールとは&lt;/strong&gt;&lt;br /&gt;
+センサから障害物までの距離を計測できるもの。今回使用した、”&lt;a href=&quot;http://akizukidenshi.com/catalog/g/gI-02551/&quot;&gt;GP2Y0A21&lt;/a&gt;“は赤外線を利用して距離を計測しているものです。&lt;/p&gt;
+
+&lt;p&gt;#&lt;strong&gt;使うもの&lt;/strong&gt;&lt;br /&gt;
+* Arduino uno R3
+* GP2Y0A21
+* ブレッドボード&lt;/p&gt;
+
+&lt;p&gt;#&lt;strong&gt;つなぎ方&lt;/strong&gt;&lt;br /&gt;
+今回はArduinoを使ってこのセンサを使ってみる。
+このセンサの使い方は簡単で、電源とGNDと出力線の三本の線があり、信号線はアナログ出力なのでそこだけ気をつけて、それぞれArduino側の5v、GND、アナログピンに接続するだけ…なのですが線の色が最悪なのでそこだけ気おつけてつなぐ。&lt;br /&gt;
+&lt;img src=&quot;http://taroooyan.github.io/images/2015-08-16-gp2.png&quot; alt=&quot;gnd_5v&quot; /&gt;&lt;br /&gt;
+回路図はこんな感じ。&lt;br /&gt;
+&lt;img src=&quot;http://taroooyan.github.io/images/2015-08-16-kairozu.png&quot; alt=&quot;回路図&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;#&lt;strong&gt;プログラム&lt;/strong&gt;&lt;br /&gt;
+回路が組めたら、あとはプログラムを書いて終わりなのだが、アナログ出力がそのまま距離ではないので、それを計算しないといけないので&lt;a href=&quot;http://happy-arduino.blogspot.jp/2012/05/2.html&quot;&gt;初心者だけど、一歩ずつ Arduino 超小型マイコン電子工作&lt;/a&gt;を参考に&lt;br /&gt;
+###&lt;strong&gt;距離(cm)  = (6787 / (読取値 - 3)) - 4&lt;/strong&gt;&lt;br /&gt;
+にした。&lt;/p&gt;
+
+&lt;script src=&quot;https://gist.github.com/taroooyan/38caddbd7b0e801a85ec.js&quot;&gt;&lt;/script&gt;
+
+&lt;p&gt;また、このセンサは安いかつ以下のような特性があるため、あまり正確さは期待できないので、50cm以内に障害物があるときは、その距離を出力し、50cm以内にないときは”Not found”を出力するようにした。&lt;br /&gt;
+&lt;img src=&quot;http://taroooyan.github.io/images/2015-08-16-tokusei.png&quot; alt=&quot;特性&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;#&lt;strong&gt;動作確認&lt;/strong&gt;&lt;br /&gt;
+&lt;img src=&quot;http://taroooyan.github.io/images/2015-08-16-kakunin.png&quot; alt=&quot;動作&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;#&lt;strong&gt;最後に&lt;/strong&gt;&lt;br /&gt;
+これを利用して、スマートハウスを作るぞ！&lt;/p&gt;
+</description>
+        <pubDate>Mon, 17 Aug 2015 06:13:07 +0900</pubDate>
+        <link>taroooyan.github.io# site url/%E9%9B%BB%E5%AD%90%E5%B7%A5%E4%BD%9C/2015/08/17/1.html</link>
+        <guid isPermaLink="true">taroooyan.github.io# site url/%E9%9B%BB%E5%AD%90%E5%B7%A5%E4%BD%9C/2015/08/17/1.html</guid>
+        
+        
+        <category>電子工作</category>
+        
+      </item>
+    
+      <item>
+        <title>Markdownを書くためのVimの設定</title>
+        <description>&lt;p&gt;ブログを書いたり、プルリクエストを書いたりとMarkdownを書くことが少しあるので、Vimでもっと快適にかけるように環境を整えました。&lt;br /&gt;
+&lt;!--more--&gt;&lt;/p&gt;
+
+&lt;p&gt;とりあえず、Markdownのシンタックスとプレビューができるようにする。
+私は、Vimのプラグインを管理するためのNeoBundleを入れてあるので、それを利用する。&lt;/p&gt;
+
+&lt;p&gt;#&lt;strong&gt;使うプラグイン&lt;/strong&gt;&lt;br /&gt;
+* vim-markdown&lt;br /&gt;
+* previm&lt;br /&gt;
+* open-browser.vim&lt;/p&gt;
+
+&lt;p&gt;#&lt;strong&gt;インストール&lt;/strong&gt;&lt;br /&gt;
+プラグインを入れるため、.vimrcに以下の3行を追加する。&lt;br /&gt;
+&lt;script src=&quot;https://gist.github.com/taroooyan/455147785f71284b7a24.js&quot;&gt;&lt;/script&gt;&lt;/p&gt;
+
+&lt;p&gt;あとは保存し、インストールします。&lt;/p&gt;
+
+&lt;p&gt;#&lt;strong&gt;プレビュー&lt;/strong&gt;&lt;br /&gt;
+MarkdownファイルをVimで開いている状態で:PrevimOpenコマンドを実行すれば、ブラウザが開き、今の状態を確認することができます。また、:wで内容を保存すれば、リアルタイムでブラウザの方に反映される。&lt;/p&gt;
+
+&lt;p&gt;#&lt;strong&gt;最後に&lt;/strong&gt;&lt;br /&gt;
+Vimで書いているのリアルタイムでブラウザに反映されるのはとても良かった。Markdownで書くことが少しずつ増えているため、もっとMarkdown記法勉強しよう。&lt;/p&gt;
+
+</description>
+        <pubDate>Thu, 13 Aug 2015 06:37:34 +0900</pubDate>
+        <link>taroooyan.github.io# site url/vim/2015/08/13/1.html</link>
+        <guid isPermaLink="true">taroooyan.github.io# site url/vim/2015/08/13/1.html</guid>
+        
+        <category>Vim</category>
+        
+        <category>Markdown</category>
+        
+        
+        <category>Vim</category>
+        
+      </item>
+    
+      <item>
+        <title>Captianを入れてみた</title>
+        <description>&lt;p&gt;Apple から一般向けに公開されているOS X El Capitanを入れてみました。&lt;/p&gt;
+
+&lt;p&gt;これは、まだベータ版でApple Beta Software Programに参加することで、El Capitanを入手することができます。しかし、まだベータ版ですので、入れる際にはバックアップを取ってからにしたほうが良いと思います。&lt;br /&gt;
+&lt;!--more--&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://taroooyan.github.io/images/2015-7-28-captian_os.png&quot; alt=&quot;captian_os&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;あまり試していませんが、日本語変換の機能がとても気持ち悪かったので紹介。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://taroooyan.github.io/images/2015-7-28-capitan.gif&quot; alt=&quot;capitan_gif&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;この変換機能面白い。&lt;br /&gt;
+文章とかを作成する際にスペースキーを押す回数がとても減りました。&lt;/p&gt;
+
+</description>
+        <pubDate>Tue, 28 Jul 2015 19:06:38 +0900</pubDate>
+        <link>taroooyan.github.io# site url/os/2015/07/28/1.html</link>
+        <guid isPermaLink="true">taroooyan.github.io# site url/os/2015/07/28/1.html</guid>
+        
+        <category>Captian</category>
+        
+        <category>OS X</category>
+        
+        
+        <category>OS</category>
+        
+      </item>
+    
+      <item>
+        <title>ArduinoとVim</title>
+        <description>&lt;p&gt;Arduinoを使った開発をVimでしたい！&lt;br /&gt;
+&lt;!--more--&gt;&lt;/p&gt;
+
+&lt;p&gt;#&lt;strong&gt;Arduinoとは&lt;/strong&gt;&lt;br /&gt;
+電子工作をやったことがある方ならきっと知っていると思いますが、&lt;a href=&quot;https://www.arduino.cc&quot;&gt;Arduino&lt;/a&gt;はマイコンボードとプログラミング環境のことで、公式からIDEが出ており比較的簡単に電子工作をすることができます。&lt;/p&gt;
+
+&lt;p&gt;#&lt;strong&gt;Vimで開発がしたい&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;公式からIDEが出ていてこれにはシリアルモニタやサンプルプログラムなど便利な機能があるのですが、コードを書く際にVimのキーバインドなどは使えなくとても使いづらい…（自分的に）。&lt;br /&gt;
+そこでVimによるArduinoの開発がしたいと思い、調べると&lt;a href=&quot;http://inotool.org&quot;&gt;ino&lt;/a&gt;というものがあった。&lt;/p&gt;
+
+&lt;p&gt;#&lt;strong&gt;インストール&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;※環境はMac OS 10.9.5&lt;br /&gt;
+※Arduino IDEを使わないにしてもinoを利用するには必要になるのでインストールしておきます。&lt;br /&gt;
+※最新版の1.6.5をダウンロードしてやった際にエラーが出てうまく行かなかったので、バージョンは1.0.5を推薦します。&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-sh&quot; data-lang=&quot;sh&quot;&gt;&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;easy_install ino&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;プロジェクトの作成&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-sh&quot; data-lang=&quot;sh&quot;&gt;&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;mkdir &lt;span class=&quot;nb&quot;&gt;test&lt;/span&gt; 
+&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cd test&lt;/span&gt;
+&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;ino init&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;これでtest内にsrc/とlib/というフォルダが作成されます。srcの中にあるsketch.inoにてプログラムを書きます。&lt;br /&gt;
+試しに以下のように変更します。&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-sh&quot; data-lang=&quot;sh&quot;&gt;void setup&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+	pinMode&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;13,OUTPUT&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;;
+	Serial.begin&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;9600&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+void loop&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+	Serial.println&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;test&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;;
+	digitalWrite&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;13,HIGH&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;;
+	delay&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;3000&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;;
+	digitalWrite&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;13,LOW&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;これは3秒おきにシリアルモニタにtestという表示され、Arduino unoのtxと書かれているLEDが点滅するプログラムです。&lt;/p&gt;
+
+&lt;p&gt;#&lt;strong&gt;ビルドと書き込み&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;＊今回Arduino Uno R3というマイコンボードを使用しています。&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-sh&quot; data-lang=&quot;sh&quot;&gt;&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;ino build
+&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;ino upload&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;これでArduino Uno側に書き込まれたはずです。&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-sh&quot; data-lang=&quot;sh&quot;&gt;Guessing serial port ... /dev/tty.＊＊＊＊　//ここは環境によって変動します。&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://taroooyan.github.io/images/2015-07-15-ino_upload.png&quot; alt=&quot;upload画像&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;#&lt;strong&gt;シリアルモニタの接続方法&lt;/strong&gt;&lt;br /&gt;
+プログラムを書き込んだ際に&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-sh&quot; data-lang=&quot;sh&quot;&gt;Guessing serial port ... /dev/tty.usbmodemfa131&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;のように表示されたとおもいます。&lt;br /&gt;
+これに対して接続すればよいので&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-sh&quot; data-lang=&quot;sh&quot;&gt;&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;screen /dev/tty.usbmodemfa131&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;これで3秒おきにシリアルモニタにtestという表示され、Arduino unoのtxと書かれているLEDが点滅します。&lt;/p&gt;
+
+</description>
+        <pubDate>Thu, 16 Jul 2015 08:18:43 +0900</pubDate>
+        <link>taroooyan.github.io# site url/%E9%9B%BB%E5%AD%90%E5%B7%A5%E4%BD%9C/2015/07/16/1.html</link>
+        <guid isPermaLink="true">taroooyan.github.io# site url/%E9%9B%BB%E5%AD%90%E5%B7%A5%E4%BD%9C/2015/07/16/1.html</guid>
+        
+        <category>Arduino</category>
+        
+        <category>Vim</category>
+        
+        
+        <category>電子工作</category>
+        
+      </item>
+    
+      <item>
+        <title>Vimiumを入れた</title>
+        <description>&lt;p&gt;ブラウザでVimのような操作をしたいと思いChromeのブラグインの”&lt;a href=&quot;https://chrome.google.com/webstore/detail/vimium/dbepggeogbaibhgnhhndojpepiihcmeb&quot;&gt;Vimium&lt;/a&gt;”というのを入れた。&lt;br /&gt;
+&lt;!--more--&gt;&lt;/p&gt;
+
+&lt;p&gt;#&lt;strong&gt;主なキー操作について&lt;/strong&gt;&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;コマンド&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;内容&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;f&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;文字のマッピング&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;gg&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;最上部に移動&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;G&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;最下部に移動&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;j&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;下スクロール&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;k&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;上スクロール　　&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;H&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;戻る&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;L&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;進む&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;t&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;新規タブ&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;x&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;タブの削除&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;b&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;ブックマークの検索&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;?&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;ショートカットリスト&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;まだまだあるけどとりあえずはこれかな。&lt;/p&gt;
+
+&lt;p&gt;その前にきちんとしたVimの使い方覚えよう&lt;/p&gt;
+
+</description>
+        <pubDate>Mon, 13 Jul 2015 06:15:18 +0900</pubDate>
+        <link>taroooyan.github.io# site url/plugin/2015/07/13/1.html</link>
+        <guid isPermaLink="true">taroooyan.github.io# site url/plugin/2015/07/13/1.html</guid>
+        
+        <category>Vim</category>
+        
+        <category>chrome</category>
+        
+        
+        <category>plugin</category>
+        
+      </item>
+    
+      <item>
+        <title>Github PagesにJekyllを使って作成</title>
+        <description>&lt;p&gt;Jekyllの使い方ついてのメモです。
+Jekyllは、Rubyで書かれていて、MarkdownファイルからHTMLの生成ができる、静的サイトジェネレーターです。&lt;br /&gt;
+&lt;!--more--&gt;
+“Githubに”username.github.io”にリポジトリを作成しておきます。&lt;br /&gt;
+Jekyllのインストールとファイルの作成&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-sh&quot; data-lang=&quot;sh&quot;&gt;gem install jekyll
+jekyll new github_blog&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;github_blogというフォルダが作られて、そこに移動してで以下のコマンドを実行すると”localhost:4000”にてブラウザ等を見ることができる。&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-sh&quot; data-lang=&quot;sh&quot;&gt;jekyll serve --watch&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;記事はgithub_blog/_posts/にMarkdownファイルを作成する。&lt;br /&gt;
+ファイル名は”YYYY-MM-DD-article-title.markdown”で作成する。&lt;br /&gt;
+簡単に作れた。&lt;/p&gt;
+
+</description>
+        <pubDate>Fri, 10 Jul 2015 08:46:16 +0900</pubDate>
+        <link>taroooyan.github.io# site url/web/2015/07/10/1.html</link>
+        <guid isPermaLink="true">taroooyan.github.io# site url/web/2015/07/10/1.html</guid>
+        
+        <category>Github</category>
+        
+        
+        <category>web</category>
+        
+      </item>
+    
+  </channel>
+</rss>

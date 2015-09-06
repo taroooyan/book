@@ -1,0 +1,27 @@
+---
+layout: post
+title:  "Github PagesにJekyllを使って作成"
+date:   2015-07-09 23:46:16
+categories: web
+tags: [Github]
+---
+Jekyllの使い方ついてのメモです。
+Jekyllは、Rubyで書かれていて、MarkdownファイルからHTMLの生成ができる、静的サイトジェネレーターです。  
+<!--more-->
+"Githubに"username.github.io"にリポジトリを作成しておきます。  
+Jekyllのインストールとファイルの作成  
+{% highlight sh %}
+gem install jekyll
+jekyll new github_blog
+{% endhighlight %}
+github_blogというフォルダが作られて、そこに移動してで以下のコマンドを実行すると"localhost:4000"にてブラウザ等を見ることができる。  
+{% highlight sh %}
+jekyll serve --watch
+{% endhighlight %}
+記事はgithub_blog/_posts/にMarkdownファイルを作成する。  
+ファイル名は"YYYY-MM-DD-article-title.markdown"で作成する。  
+簡単に作れた。
+
+[jekyll]:      http://jekyllrb.com
+[jekyll-gh]:   https://github.com/jekyll/jekyll
+[jekyll-help]: https://github.com/jekyll/jekyll-help

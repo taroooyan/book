@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- head -->
+    <meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>天気予報を確実に知りたい</title>
+
+<!-- favicon -->
+<link rel="shortcut icon" type="image/x-icon" href="" />
+<link rel="icon" type="image/x-icon" href="" />
+
+<!-- RSS -->
+<link rel="alternate" type="application/rss+xml" title="なにもしない太郎" href="/feed.xml" />
+
+
+    <!-- fonts -->
+    <link href='http://fonts.googleapis.com/css?family=Titillium+Web' rel='stylesheet' type='text/css'>
+
+    <!-- stylesheet -->
+    <link rel="stylesheet" href="/assets/css/solarized_dark.css" />
+    <link rel="stylesheet" href="/assets/css/style.css" />
+
+    <!-- script -->
+    <script src="/assets/js/jquery-1.11.3.min.js"></script>
+    <script src="/assets/js/highlight.pack.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script src="/assets/js/script.js"></script>
+
+    
+  </head>
+  <body>
+
+    <div class="footer-clear post-wrapper">
+
+  <!-- post archive trigger -->
+  <div class="post-archive-trigger">
+    <div class="post-archive-icon"></div>
+  </div>
+
+  <!-- post archive -->
+  <div class="post-archive">
+    <div class="post-archive-iterms">
+      
+      
+      <a class="post-archive-iterm" href="/iot/2015/12/12/1.html">
+        <span class="post-archive-date">2015-12-12</span>
+        <span class="post-archive-title checked">天気予報を確実に知りたい</span>
+      </a>
+      
+      
+      <a class="post-archive-iterm" href="/blog/2015/08/28/jekyll-theme-book.html">
+        <span class="post-archive-date">2015-08-28</span>
+        <span class="post-archive-title ">A Jekyll Theme Named Book</span>
+      </a>
+      
+      
+      <a class="post-archive-iterm" href="/blog/2015/08/28/book-style-doc.html">
+        <span class="post-archive-date">2015-08-28</span>
+        <span class="post-archive-title ">Book Style</span>
+      </a>
+      
+      
+      <a class="post-archive-iterm" href="/%E9%9B%BB%E5%AD%90%E5%B7%A5%E4%BD%9C/2015/08/17/1.html">
+        <span class="post-archive-date">2015-08-17</span>
+        <span class="post-archive-title ">測距モジュールを使ってみた</span>
+      </a>
+      
+      
+      <a class="post-archive-iterm" href="/vim/2015/08/13/1.html">
+        <span class="post-archive-date">2015-08-13</span>
+        <span class="post-archive-title ">Markdownを書くためのVimの設定</span>
+      </a>
+      
+      
+      <a class="post-archive-iterm" href="/os/2015/07/28/1.html">
+        <span class="post-archive-date">2015-07-28</span>
+        <span class="post-archive-title ">Captianを入れてみた</span>
+      </a>
+      
+      
+      <a class="post-archive-iterm" href="/%E9%9B%BB%E5%AD%90%E5%B7%A5%E4%BD%9C/2015/07/16/1.html">
+        <span class="post-archive-date">2015-07-16</span>
+        <span class="post-archive-title ">ArduinoとVim</span>
+      </a>
+      
+      
+      <a class="post-archive-iterm" href="/plugin/2015/07/13/1.html">
+        <span class="post-archive-date">2015-07-13</span>
+        <span class="post-archive-title ">Vimiumを入れた</span>
+      </a>
+      
+      
+      <a class="post-archive-iterm" href="/web/2015/07/10/1.html">
+        <span class="post-archive-date">2015-07-10</span>
+        <span class="post-archive-title ">Github PagesにJekyllを使って作成</span>
+      </a>
+      
+    </div>
+  </div>
+
+  <!-- post header -->
+  <div class="post-header">
+    <h1>天気予報を確実に知りたい</h1>
+    <span>2015-12-12</span>
+  </div>
+
+  <!-- post content -->
+  
+
+  <div class="post-content english">
+    <p>雨に打たれないためにも雨が振りそうなときには傘を持つようにしたい.</p>
+
+<!--more-->
+
+<p>この記事は<a href="http://www.adventar.org/calendars/888#list-2015-12-11">Aizu Advent Calendar 2015</a>の12日目のです。<br />
+前の人 <a href="https://twitter.com/TobiasGSmollett">@TobiasGSmollett</a>:<a href="http://qiita.com/TobiasGSmollett/items/c839f0109229795be444">日常系のゆるふわな何か</a><br />
+記事を書いていて気づいたけどAizu Advent Calender 2015 のURL <em>http://www.adventar.org/calendars/888</em>がゾロ目だった.</p>
+
+<h3 id="section"><strong>やりたいこと</strong></h3>
+<p>普段から天気予報を見る習慣がないので基本的に傘を持っていなくて，よく雨に打たれる．<br />
+まぁ, 家を出る前にスマホとかで確認をすれば良いのだが，それすら忘れる．何も気にすること無くその日の天気予報を確実に知りたいな．<br />
+そこで, 家をでる前にその日の天気予報を喋ってもらえば確実に気づけると思ったので, そのようなものを作ってみる.<br />
+とりあえず環境はOSXでためして、raspebery piに移したい.</p>
+
+<h3 id="section-1"><strong>やること</strong></h3>
+
+<ol>
+  <li>
+    <p>天気予報の取得<br />
+<img src="http://taroooyan.github.io/images/2015-12-12-weather.png" alt="week_weather" /><br />
+気象庁の天気予報をJSONとして配信している”<a href="http://www.drk7.jp/weather/json/07.js">drk7.jp</a>“を使って情報を取得する.</p>
+  </li>
+  <li>
+    <p>音声ファイルの作成<br />
+テキストを音声に変換してくれる便利なAPIがあるのでそれを使用する. 今回は<a href="https://cloud.voicetext.jp/webapi">VoiceText Web API</a>を使います.<br />
+<img src="http://taroooyan.github.io/images/2015-12-12-webapi.png" alt="webapi" /><br />
+これを使用するためのAPI_KEYを取得しておきます.<br />
+<script src="https://gist.github.com/taroooyan/dc95ca1d5129fc474b28.js"></script>
+これでtextを音声ファイルにしてaac.wavという名前で生成されます.</p>
+  </li>
+  <li>
+    <p>人が家から出るのを検知して, 音声を流す<br />
+測距モジュール(GP2Y0A21)を使用して判定する.(人感センサーや超音波センサーでも可能だが以前に使ったことのあるこれを使用)<br />
+*このセンサについては<a href="http://taroooyan.github.io/%E9%9B%BB%E5%AD%90%E5%B7%A5%E4%BD%9C/2015/08/16/1/">以前の記事</a>で紹介<br />
+このセンサーを玄関の扉にくっつけてあげて近づいた時に反応するように調整する.</p>
+  </li>
+</ol>
+
+<h3 id="section-2"><strong>できたもの</strong></h3>
+<script src="http://gist-it.appspot.com/github/taroooyan/notice_weather/blob/master/main.rb"></script>
+
+<script src="http://gist-it.appspot.com/github/taroooyan/notice_weather/blob/master/Arduino/src/sketch.ino"></script>
+
+<p>ログファイルに書き込むことをしていないので実行するときに書き込む<br />
+$<code class="highlighter-rouge">ruby ./main.rb &gt; log</code></p>
+
+<p>これで、センサに近づいた時にその日の天気を教えてくれものができた.<br />
+<img src="http://taroooyan.github.io/images/2015-12-12-fin.png" alt="2" /><br />
+また、毎日2時になると更新されるので以下のうようなデータ取れているはず.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>2015-12-12
+気温
+max 11
+min 6
+降水確率
+00-06 0%
+06-12 20%
+12-18 0%
+18-24 0%
+天気
+晴れ
+--------------
+2015-12-13
+気温
+max 10
+min 2
+降水確率
+00-06 0%
+06-12 0%
+12-18 10%
+18-24 10%
+天気
+くもり
+--------------
+...
+</code></pre>
+</div>
+
+<p>実はまだ玄関に取り付けてないので早くraspbery piに移して取り付けよう.</p>
+
+<p>次の人は<a href="https://twitter.com/a_r_g_v">@a_r_g_v</a>
+よろしくお願いします!!</p>
+
+  </div>
+
+  <!-- post navigator -->
+  <div class="post-nav">
+    
+    <a class="post-nav-previous"href="/blog/2015/08/28/jekyll-theme-book.html">A Jekyll Theme Named Book</a>
+    
+
+    
+
+    
+  </div>
+
+  <!-- disqus comment system -->
+  
+  <div class="post-comment">
+    <div id="disqus_thread"></div>
+<script type="text/javascript">
+var disqus_shortname = '';
+(function() {
+  var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+  </div>
+  
+
+  <!-- footer -->
+  <div class="footer">
+  <span>&copy;</span>
+  <span><script type="text/javascript">document.write(new Date().getFullYear());</script></span>
+  <a class="link-1" href="/">なにもしない太郎</a>
+  <br />
+  <span>Powered by <a class="link-1" href="http://jekyllrb.com/">Jekyll</a> with <a class="link-1" href="https://github.com/kkninjae/book">Book</a> theme.</span>
+</div>
+
+
+</div>
+
+
+  </body>
+</html>

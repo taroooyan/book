@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- head -->
+    <meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>測距モジュールを使ってみた</title>
+
+<!-- favicon -->
+<link rel="shortcut icon" type="image/x-icon" href="" />
+<link rel="icon" type="image/x-icon" href="" />
+
+<!-- RSS -->
+<link rel="alternate" type="application/rss+xml" title="なにもしない太郎" href="/feed.xml" />
+
+
+    <!-- fonts -->
+    <link href='http://fonts.googleapis.com/css?family=Titillium+Web' rel='stylesheet' type='text/css'>
+
+    <!-- stylesheet -->
+    <link rel="stylesheet" href="/assets/css/solarized_dark.css" />
+    <link rel="stylesheet" href="/assets/css/style.css" />
+
+    <!-- script -->
+    <script src="/assets/js/jquery-1.11.3.min.js"></script>
+    <script src="/assets/js/highlight.pack.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script src="/assets/js/script.js"></script>
+
+    
+  </head>
+  <body>
+
+    <div class="footer-clear post-wrapper">
+
+  <!-- post archive trigger -->
+  <div class="post-archive-trigger">
+    <div class="post-archive-icon"></div>
+  </div>
+
+  <!-- post archive -->
+  <div class="post-archive">
+    <div class="post-archive-iterms">
+      
+      
+      <a class="post-archive-iterm" href="/iot/2015/12/12/1.html">
+        <span class="post-archive-date">2015-12-12</span>
+        <span class="post-archive-title ">天気予報を確実に知りたい</span>
+      </a>
+      
+      
+      <a class="post-archive-iterm" href="/blog/2015/08/28/jekyll-theme-book.html">
+        <span class="post-archive-date">2015-08-28</span>
+        <span class="post-archive-title ">A Jekyll Theme Named Book</span>
+      </a>
+      
+      
+      <a class="post-archive-iterm" href="/blog/2015/08/28/book-style-doc.html">
+        <span class="post-archive-date">2015-08-28</span>
+        <span class="post-archive-title ">Book Style</span>
+      </a>
+      
+      
+      <a class="post-archive-iterm" href="/%E9%9B%BB%E5%AD%90%E5%B7%A5%E4%BD%9C/2015/08/17/1.html">
+        <span class="post-archive-date">2015-08-17</span>
+        <span class="post-archive-title checked">測距モジュールを使ってみた</span>
+      </a>
+      
+      
+      <a class="post-archive-iterm" href="/vim/2015/08/13/1.html">
+        <span class="post-archive-date">2015-08-13</span>
+        <span class="post-archive-title ">Markdownを書くためのVimの設定</span>
+      </a>
+      
+      
+      <a class="post-archive-iterm" href="/os/2015/07/28/1.html">
+        <span class="post-archive-date">2015-07-28</span>
+        <span class="post-archive-title ">Captianを入れてみた</span>
+      </a>
+      
+      
+      <a class="post-archive-iterm" href="/%E9%9B%BB%E5%AD%90%E5%B7%A5%E4%BD%9C/2015/07/16/1.html">
+        <span class="post-archive-date">2015-07-16</span>
+        <span class="post-archive-title ">ArduinoとVim</span>
+      </a>
+      
+      
+      <a class="post-archive-iterm" href="/plugin/2015/07/13/1.html">
+        <span class="post-archive-date">2015-07-13</span>
+        <span class="post-archive-title ">Vimiumを入れた</span>
+      </a>
+      
+      
+      <a class="post-archive-iterm" href="/web/2015/07/10/1.html">
+        <span class="post-archive-date">2015-07-10</span>
+        <span class="post-archive-title ">Github PagesにJekyllを使って作成</span>
+      </a>
+      
+    </div>
+  </div>
+
+  <!-- post header -->
+  <div class="post-header">
+    <h1>測距モジュールを使ってみた</h1>
+    <span>2015-08-17</span>
+  </div>
+
+  <!-- post content -->
+  
+
+  <div class="post-content english">
+    <p>シャープから発売されている測距モジュール”<a href="http://akizukidenshi.com/catalog/g/gI-02551/">GP2Y0A21</a>“を使ってみたのでそれのメモ。</p>
+
+<!--more-->
+
+<p>#<strong>測距モジュールとは</strong><br />
+センサから障害物までの距離を計測できるもの。今回使用した、”<a href="http://akizukidenshi.com/catalog/g/gI-02551/">GP2Y0A21</a>“は赤外線を利用して距離を計測しているものです。</p>
+
+<p>#<strong>使うもの</strong><br />
+* Arduino uno R3
+* GP2Y0A21
+* ブレッドボード</p>
+
+<p>#<strong>つなぎ方</strong><br />
+今回はArduinoを使ってこのセンサを使ってみる。
+このセンサの使い方は簡単で、電源とGNDと出力線の三本の線があり、信号線はアナログ出力なのでそこだけ気をつけて、それぞれArduino側の5v、GND、アナログピンに接続するだけ…なのですが線の色が最悪なのでそこだけ気おつけてつなぐ。<br />
+<img src="http://taroooyan.github.io/images/2015-08-16-gp2.png" alt="gnd_5v" /><br />
+回路図はこんな感じ。<br />
+<img src="http://taroooyan.github.io/images/2015-08-16-kairozu.png" alt="回路図" /></p>
+
+<p>#<strong>プログラム</strong><br />
+回路が組めたら、あとはプログラムを書いて終わりなのだが、アナログ出力がそのまま距離ではないので、それを計算しないといけないので<a href="http://happy-arduino.blogspot.jp/2012/05/2.html">初心者だけど、一歩ずつ Arduino 超小型マイコン電子工作</a>を参考に<br />
+###<strong>距離(cm)  = (6787 / (読取値 - 3)) - 4</strong><br />
+にした。</p>
+
+<script src="https://gist.github.com/taroooyan/38caddbd7b0e801a85ec.js"></script>
+
+<p>また、このセンサは安いかつ以下のような特性があるため、あまり正確さは期待できないので、50cm以内に障害物があるときは、その距離を出力し、50cm以内にないときは”Not found”を出力するようにした。<br />
+<img src="http://taroooyan.github.io/images/2015-08-16-tokusei.png" alt="特性" /></p>
+
+<p>#<strong>動作確認</strong><br />
+<img src="http://taroooyan.github.io/images/2015-08-16-kakunin.png" alt="動作" /></p>
+
+<p>#<strong>最後に</strong><br />
+これを利用して、スマートハウスを作るぞ！</p>
+
+  </div>
+
+  <!-- post navigator -->
+  <div class="post-nav">
+    
+    <a class="post-nav-previous"href="/vim/2015/08/13/1.html">Markdownを書くためのVimの設定</a>
+    
+
+    
+    <div class="post-nav-sep"></div>
+    
+
+    
+    <a class="post-nav-next" href="/blog/2015/08/28/book-style-doc.html">Book Style</a>
+    
+  </div>
+
+  <!-- disqus comment system -->
+  
+  <div class="post-comment">
+    <div id="disqus_thread"></div>
+<script type="text/javascript">
+var disqus_shortname = '';
+(function() {
+  var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+  </div>
+  
+
+  <!-- footer -->
+  <div class="footer">
+  <span>&copy;</span>
+  <span><script type="text/javascript">document.write(new Date().getFullYear());</script></span>
+  <a class="link-1" href="/">なにもしない太郎</a>
+  <br />
+  <span>Powered by <a class="link-1" href="http://jekyllrb.com/">Jekyll</a> with <a class="link-1" href="https://github.com/kkninjae/book">Book</a> theme.</span>
+</div>
+
+
+</div>
+
+
+  </body>
+</html>

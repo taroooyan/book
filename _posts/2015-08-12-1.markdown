@@ -1,0 +1,31 @@
+---
+layout: post
+title:  "Markdownを書くためのVimの設定"
+date:  2015-08-12 21:37:34
+categories: Vim
+tags: [Vim,Markdown]
+---
+ブログを書いたり、プルリクエストを書いたりとMarkdownを書くことが少しあるので、Vimでもっと快適にかけるように環境を整えました。  
+<!--more-->
+
+とりあえず、Markdownのシンタックスとプレビューができるようにする。
+私は、Vimのプラグインを管理するためのNeoBundleを入れてあるので、それを利用する。  
+
+#**使うプラグイン**  
+* vim-markdown  
+* previm  
+* open-browser.vim  
+
+#**インストール**  
+プラグインを入れるため、.vimrcに以下の3行を追加する。  
+<script src="https://gist.github.com/taroooyan/455147785f71284b7a24.js"></script>
+
+あとは保存し、インストールします。  
+
+#**プレビュー**  
+MarkdownファイルをVimで開いている状態で:PrevimOpenコマンドを実行すれば、ブラウザが開き、今の状態を確認することができます。また、:wで内容を保存すれば、リアルタイムでブラウザの方に反映される。  
+
+#**最後に**  
+Vimで書いているのリアルタイムでブラウザに反映されるのはとても良かった。Markdownで書くことが少しずつ増えているため、もっとMarkdown記法勉強しよう。  
+
+

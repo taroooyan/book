@@ -1,0 +1,33 @@
+---
+layout: post
+title:  "Vimiumを入れた"
+date:  2015-07-12 21:15:18
+categories:  plugin
+tags: [Vim,chrome]
+---
+ブラウザでVimのような操作をしたいと思いChromeのブラグインの”[Vimium](https://chrome.google.com/webstore/detail/vimium/dbepggeogbaibhgnhhndojpepiihcmeb)”というのを入れた。  
+<!--more-->
+
+#**主なキー操作について**  
+
+
+| コマンド     | 内容                 |
+| :------------: | :--------------------: |
+| f	           | 文字のマッピング     |
+| gg		   | 最上部に移動         |
+| G            | 最下部に移動         |
+| j            | 下スクロール         |
+| k			   | 上スクロール　　     |
+| H            | 戻る                 |
+| L            | 進む                 |
+| t            | 新規タブ             |
+| x			   | タブの削除		      |
+| b            | ブックマークの検索   |
+| ?            | ショートカットリスト |
+
+まだまだあるけどとりあえずはこれかな。  
+
+その前にきちんとしたVimの使い方覚えよう  
+
+
+
