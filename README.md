@@ -15,6 +15,7 @@ Book, a simple Jekyll theme. [Demo](http://kkninjae.github.io/book/)
 
 * Responsive layout and mobile first
 * Customized [404](http://kkninjae.github.io/book/hehe) page
+* Footer link is the back-home link
 
 ### Get started
 
