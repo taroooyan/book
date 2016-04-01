@@ -1,0 +1,67 @@
+<p>Arduinoを使った開発をVimでしたい！<br />
+<!--more--></p>
+
+<p>#<strong>Arduinoとは</strong><br />
+電子工作をやったことがある方ならきっと知っていると思いますが、<a href="https://www.arduino.cc">Arduino</a>はマイコンボードとプログラミング環境のことで、公式からIDEが出ており比較的簡単に電子工作をすることができます。</p>
+
+<p>#<strong>Vimで開発がしたい</strong></p>
+
+<p>公式からIDEが出ていてこれにはシリアルモニタやサンプルプログラムなど便利な機能があるのですが、コードを書く際にVimのキーバインドなどは使えなくとても使いづらい…（自分的に）。<br />
+そこでVimによるArduinoの開発がしたいと思い、調べると<a href="http://inotool.org">ino</a>というものがあった。</p>
+
+<p>#<strong>インストール</strong></p>
+
+<p>※環境はMac OS 10.9.5<br />
+※Arduino IDEを使わないにしてもinoを利用するには必要になるのでインストールしておきます。<br />
+※最新版の1.6.5をダウンロードしてやった際にエラーが出てうまく行かなかったので、バージョンは1.0.5を推薦します。</p>
+
+<figure class="highlight"><pre><code class="language-sh" data-lang="sh"><span class="gp">$ </span>easy_install ino</code></pre></figure>
+
+<p>プロジェクトの作成</p>
+
+<figure class="highlight"><pre><code class="language-sh" data-lang="sh"><span class="gp">$ </span>mkdir <span class="nb">test</span> 
+<span class="gp">$ </span><span class="nb">cd test</span>
+<span class="gp">$ </span>ino init</code></pre></figure>
+
+<p>これでtest内にsrc/とlib/というフォルダが作成されます。srcの中にあるsketch.inoにてプログラムを書きます。<br />
+試しに以下のように変更します。</p>
+
+<figure class="highlight"><pre><code class="language-sh" data-lang="sh">void setup<span class="o">()</span> <span class="o">{</span>
+	pinMode<span class="o">(</span>13,OUTPUT<span class="o">)</span>;
+	Serial.begin<span class="o">(</span>9600<span class="o">)</span>;
+<span class="o">}</span>
+
+void loop<span class="o">()</span> <span class="o">{</span>
+	Serial.println<span class="o">(</span><span class="s2">"test"</span><span class="o">)</span>;
+	digitalWrite<span class="o">(</span>13,HIGH<span class="o">)</span>;
+	delay<span class="o">(</span>3000<span class="o">)</span>;
+	digitalWrite<span class="o">(</span>13,LOW<span class="o">)</span>;
+<span class="o">}</span></code></pre></figure>
+
+<p>これは3秒おきにシリアルモニタにtestという表示され、Arduino unoのtxと書かれているLEDが点滅するプログラムです。</p>
+
+<p>#<strong>ビルドと書き込み</strong></p>
+
+<p>＊今回Arduino Uno R3というマイコンボードを使用しています。</p>
+
+<figure class="highlight"><pre><code class="language-sh" data-lang="sh"><span class="gp">$ </span>ino build
+<span class="gp">$ </span>ino upload</code></pre></figure>
+
+<p>これでArduino Uno側に書き込まれたはずです。</p>
+
+<figure class="highlight"><pre><code class="language-sh" data-lang="sh">Guessing serial port ... /dev/tty.＊＊＊＊　//ここは環境によって変動します。</code></pre></figure>
+
+<p><img src="http://taroooyan.github.io/images/2015-07-15-ino_upload.png" alt="upload画像" /></p>
+
+<p>#<strong>シリアルモニタの接続方法</strong><br />
+プログラムを書き込んだ際に</p>
+
+<figure class="highlight"><pre><code class="language-sh" data-lang="sh">Guessing serial port ... /dev/tty.usbmodemfa131</code></pre></figure>
+
+<p>のように表示されたとおもいます。<br />
+これに対して接続すればよいので</p>
+
+<figure class="highlight"><pre><code class="language-sh" data-lang="sh"><span class="gp">$ </span>screen /dev/tty.usbmodemfa131</code></pre></figure>
+
+<p>これで3秒おきにシリアルモニタにtestという表示され、Arduino unoのtxと書かれているLEDが点滅します。</p>
+

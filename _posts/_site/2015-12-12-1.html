@@ -1,0 +1,86 @@
+<p>雨に打たれないためにも雨が振りそうなときには傘を持つようにしたい.</p>
+
+<!--more-->
+
+<p>この記事は<a href="http://www.adventar.org/calendars/888#list-2015-12-11">Aizu Advent Calendar 2015</a>の12日目のです。<br />
+前の人 <a href="https://twitter.com/TobiasGSmollett">@TobiasGSmollett</a>:<a href="http://qiita.com/TobiasGSmollett/items/c839f0109229795be444">日常系のゆるふわな何か</a><br />
+記事を書いていて気づいたけどAizu Advent Calender 2015 のURL <em>http://www.adventar.org/calendars/888</em>がゾロ目だった.</p>
+
+<h3 id="section"><strong>やりたいこと</strong></h3>
+<hr />
+
+<p>普段から天気予報を見る習慣がないので基本的に傘を持っていなくて，よく雨に打たれる．<br />
+まぁ, 家を出る前にスマホとかで確認をすれば良いのだが，それすら忘れる．何も気にすること無くその日の天気予報を確実に知りたいな．<br />
+そこで, 家をでる前にその日の天気予報を喋ってもらえば確実に気づけると思ったので, そのようなものを作ってみる.<br />
+とりあえず環境はOSXでためして、raspebery piに移したい.</p>
+
+<h3 id="section-1"><strong>やること</strong></h3>
+<hr />
+
+<ol>
+  <li>
+    <p>天気予報の取得<br />
+<img src="http://taroooyan.github.io/images/2015-12-12-weather.png" alt="week_weather" /><br />
+気象庁の天気予報をJSONとして配信している”<a href="http://www.drk7.jp/weather/json/07.js">drk7.jp</a>“を使って情報を取得する.</p>
+  </li>
+  <li>
+    <p>音声ファイルの作成<br />
+テキストを音声に変換してくれる便利なAPIがあるのでそれを使用する. 今回は<a href="https://cloud.voicetext.jp/webapi">VoiceText Web API</a>を使います.<br />
+<img src="http://taroooyan.github.io/images/2015-12-12-webapi.png" alt="webapi" /><br />
+これを使用するためのAPI_KEYを取得しておきます.<br />
+<script src="https://gist.github.com/taroooyan/dc95ca1d5129fc474b28.js"></script>
+これでtextを音声ファイルにしてaac.wavという名前で生成されます.</p>
+  </li>
+  <li>
+    <p>人が家から出るのを検知して, 音声を流す<br />
+測距モジュール(GP2Y0A21)を使用して判定する.(人感センサーや超音波センサーでも可能だが以前に使ったことのあるこれを使用)<br />
+*このセンサについては<a href="http://taroooyan.github.io/%E9%9B%BB%E5%AD%90%E5%B7%A5%E4%BD%9C/2015/08/16/1/">以前の記事</a>で紹介<br />
+このセンサーを玄関の扉にくっつけてあげて近づいた時に反応するように調整する.</p>
+  </li>
+</ol>
+
+<h3 id="section-2"><strong>できたもの</strong></h3>
+<hr />
+<script src="http://gist-it.appspot.com/github/taroooyan/notice_weather/blob/master/main.rb"></script>
+
+<script src="http://gist-it.appspot.com/github/taroooyan/notice_weather/blob/master/Arduino/src/sketch.ino"></script>
+
+<p>ログファイルに書き込むことをしていないので実行するときに書き込む<br />
+$<code class="highlighter-rouge">ruby ./main.rb &gt; log</code></p>
+
+<p>これで、センサに近づいた時にその日の天気を教えてくれものができた.<br />
+<img src="http://taroooyan.github.io/images/2015-12-12-fin.png" alt="2" /><br />
+また、毎日2時になると更新されるので以下のうようなデータ取れているはず.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>2015-12-12
+気温
+max 11
+min 6
+降水確率
+00-06 0%
+06-12 20%
+12-18 0%
+18-24 0%
+天気
+晴れ
+--------------
+2015-12-13
+気温
+max 10
+min 2
+降水確率
+00-06 0%
+06-12 0%
+12-18 10%
+18-24 10%
+天気
+くもり
+--------------
+...
+</code></pre>
+</div>
+
+<p>実はまだ玄関に取り付けてないので早くraspbery piに移して取り付けよう.</p>
+
+<p>次の人は<a href="https://twitter.com/a_r_g_v">@a_r_g_v</a>
+よろしくお願いします!!</p>

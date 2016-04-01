@@ -1,0 +1,34 @@
+<p>シャープから発売されている測距モジュール”<a href="http://akizukidenshi.com/catalog/g/gI-02551/">GP2Y0A21</a>“を使ってみたのでそれのメモ。</p>
+
+<!--more-->
+
+<p>#<strong>測距モジュールとは</strong><br />
+センサから障害物までの距離を計測できるもの。今回使用した、”<a href="http://akizukidenshi.com/catalog/g/gI-02551/">GP2Y0A21</a>“は赤外線を利用して距離を計測しているものです。</p>
+
+<p>#<strong>使うもの</strong><br />
+* Arduino uno R3
+* GP2Y0A21
+* ブレッドボード</p>
+
+<p>#<strong>つなぎ方</strong><br />
+今回はArduinoを使ってこのセンサを使ってみる。
+このセンサの使い方は簡単で、電源とGNDと出力線の三本の線があり、信号線はアナログ出力なのでそこだけ気をつけて、それぞれArduino側の5v、GND、アナログピンに接続するだけ…なのですが線の色が最悪なのでそこだけ気おつけてつなぐ。<br />
+<img src="http://taroooyan.github.io/images/2015-08-16-gp2.png" alt="gnd_5v" /><br />
+回路図はこんな感じ。<br />
+<img src="http://taroooyan.github.io/images/2015-08-16-kairozu.png" alt="回路図" /></p>
+
+<p>#<strong>プログラム</strong><br />
+回路が組めたら、あとはプログラムを書いて終わりなのだが、アナログ出力がそのまま距離ではないので、それを計算しないといけないので<a href="http://happy-arduino.blogspot.jp/2012/05/2.html">初心者だけど、一歩ずつ Arduino 超小型マイコン電子工作</a>を参考に<br />
+###<strong>距離(cm)  = (6787 / (読取値 - 3)) - 4</strong><br />
+にした。</p>
+
+<script src="https://gist.github.com/taroooyan/38caddbd7b0e801a85ec.js"></script>
+
+<p>また、このセンサは安いかつ以下のような特性があるため、あまり正確さは期待できないので、50cm以内に障害物があるときは、その距離を出力し、50cm以内にないときは”Not found”を出力するようにした。<br />
+<img src="http://taroooyan.github.io/images/2015-08-16-tokusei.png" alt="特性" /></p>
+
+<p>#<strong>動作確認</strong><br />
+<img src="http://taroooyan.github.io/images/2015-08-16-kakunin.png" alt="動作" /></p>
+
+<p>#<strong>最後に</strong><br />
+これを利用して、スマートハウスを作るぞ！</p>

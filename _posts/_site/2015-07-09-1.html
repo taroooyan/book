@@ -1,0 +1,17 @@
+<p>Jekyllの使い方ついてのメモです。
+Jekyllは、Rubyで書かれていて、MarkdownファイルからHTMLの生成ができる、静的サイトジェネレーターです。<br />
+<!--more-->
+“Githubに”username.github.io”にリポジトリを作成しておきます。<br />
+Jekyllのインストールとファイルの作成</p>
+
+<figure class="highlight"><pre><code class="language-sh" data-lang="sh">gem install jekyll
+jekyll new github_blog</code></pre></figure>
+
+<p>github_blogというフォルダが作られて、そこに移動してで以下のコマンドを実行すると”localhost:4000”にてブラウザ等を見ることができる。</p>
+
+<figure class="highlight"><pre><code class="language-sh" data-lang="sh">jekyll serve --watch</code></pre></figure>
+
+<p>記事はgithub_blog/_posts/にMarkdownファイルを作成する。<br />
+ファイル名は”YYYY-MM-DD-article-title.markdown”で作成する。<br />
+簡単に作れた。</p>
+

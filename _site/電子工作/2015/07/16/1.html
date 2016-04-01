@@ -113,15 +113,15 @@
     <p>Arduinoを使った開発をVimでしたい！<br />
 <!--more--></p>
 
-<p>#<strong>Arduinoとは</strong><br />
-電子工作をやったことがある方ならきっと知っていると思いますが、<a href="https://www.arduino.cc">Arduino</a>はマイコンボードとプログラミング環境のことで、公式からIDEが出ており比較的簡単に電子工作をすることができます。</p>
+<h3 id="arduino"><strong>Arduinoとは</strong></h3>
+<p>電子工作をやったことがある方ならきっと知っていると思いますが、<a href="https://www.arduino.cc">Arduino</a>はマイコンボードとプログラミング環境のことで、公式からIDEが出ており比較的簡単に電子工作をすることができます。</p>
 
-<p>#<strong>Vimで開発がしたい</strong></p>
+<h3 id="vim"><strong>Vimで開発がしたい</strong></h3>
 
 <p>公式からIDEが出ていてこれにはシリアルモニタやサンプルプログラムなど便利な機能があるのですが、コードを書く際にVimのキーバインドなどは使えなくとても使いづらい…（自分的に）。<br />
 そこでVimによるArduinoの開発がしたいと思い、調べると<a href="http://inotool.org">ino</a>というものがあった。</p>
 
-<p>#<strong>インストール</strong></p>
+<h3 id="section"><strong>インストール</strong></h3>
 
 <p>※環境はMac OS 10.9.5<br />
 ※Arduino IDEを使わないにしてもinoを利用するには必要になるのでインストールしておきます。<br />
@@ -152,7 +152,7 @@ void loop<span class="o">()</span> <span class="o">{</span>
 
 <p>これは3秒おきにシリアルモニタにtestという表示され、Arduino unoのtxと書かれているLEDが点滅するプログラムです。</p>
 
-<p>#<strong>ビルドと書き込み</strong></p>
+<h3 id="section-1"><strong>ビルドと書き込み</strong></h3>
 
 <p>＊今回Arduino Uno R3というマイコンボードを使用しています。</p>
 
@@ -165,8 +165,8 @@ void loop<span class="o">()</span> <span class="o">{</span>
 
 <p><img src="http://taroooyan.github.io/images/2015-07-15-ino_upload.png" alt="upload画像" /></p>
 
-<p>#<strong>シリアルモニタの接続方法</strong><br />
-プログラムを書き込んだ際に</p>
+<h3 id="section-2"><strong>シリアルモニタの接続方法</strong></h3>
+<p>プログラムを書き込んだ際に</p>
 
 <figure class="highlight"><pre><code class="language-sh" data-lang="sh">Guessing serial port ... /dev/tty.usbmodemfa131</code></pre></figure>
 
